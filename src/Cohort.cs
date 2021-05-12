@@ -616,20 +616,20 @@ namespace Landis.Extension.Succession.BiomassPnET
                     }
                     else if (ecoregion.Variables.Month == (int)Constants.Months.June) //Apply defoliation only in June
                     {
-                        if (firstDefol) // prevents multiple rounds of defoliation within a cohort (which shares canopy variables, like foliage)
-                        {
+                        //if (firstDefol) // prevents multiple rounds of defoliation within a cohort (which shares canopy variables, like foliage)
+                        //{
                             ReduceFoliage(defolProp);
-                            firstDefol = false;
+                          //  firstDefol = false;
                             // carbon stress from defoliation in June
                             float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo take out amount equal to difference between fol and IdealFol of NSC as carbon tax for month 
 
                             // Subtract from NSC do not add Fol
                             nsc -= 2.0f * Folalloc;
-                        }
+                        //}
                     }
                     else if (ecoregion.Variables.Month > (int)Constants.Months.June) //During and after defoliation events
                     {
-                        if (defolProp > 0 && firstAlloc)
+                        if (defolProp > 0) //&& firstAlloc
                         {
                             if (defolProp > 0.60 && species.TOfol == 1)  // Refoliation at >60% reduction in foliage for deciduous trees - MGM
                             {
@@ -654,9 +654,9 @@ namespace Landis.Extension.Succession.BiomassPnET
                                 // Subtract from NSC do not add Fol
                                 nsc -= 10.0f * Folalloc;
                             }
-                            firstAlloc = false;  // Denotes that allocation has been applied to one sublayer
+                            //firstAlloc = false;  // Denotes that allocation has been applied to one sublayer
                         }
-                        else if (IdealFol > fol && firstAlloc)    //Non-defoliated trees refoliate 'normally', but only once per cohort
+                        else if (IdealFol > fol)    // && firstAlloc //Non-defoliated trees refoliate 'normally', but only once per cohort
                         {
                             // Foliage allocation depends on availability of NSC (allows deficit at this time so no min nsc)
                             // carbon fraction of biomass to convert C to DW
@@ -667,15 +667,15 @@ namespace Landis.Extension.Succession.BiomassPnET
 
                             // Subtract from NSC
                             nsc -= Folalloc;
-                            firstAlloc = false; // Denotes that allocation has been applied to one sublayer
+                            //firstAlloc = false; // Denotes that allocation has been applied to one sublayer
                         }
                     }
                 }
                 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ MGM's restructuring 10/25/2018 updated 12/10/2020 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-
+            }
                 // Leaf area index for the subcanopy layer by index. Function of specific leaf weight SLWMAX and the depth of the canopy
                 LAI[index] = CalculateLAI(species, fol, index);
-
+            
             // Adjust HalfSat for CO2 effect
             float halfSatIntercept = species.HalfSat - 350 * species.CO2HalfSatEff;
             adjHalfSat = species.CO2HalfSatEff * ecoregion.Variables.CO2 + halfSatIntercept;

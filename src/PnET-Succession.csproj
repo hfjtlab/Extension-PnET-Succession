@@ -77,6 +77,19 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Include="lib\Landis.Library.AgeOnlyCohorts-v3.dll" />
+    <None Include="lib\Landis.Library.Biomass-v2.dll" />
+    <None Include="lib\Landis.Library.BiomassCohorts-v3.dll" />
+    <None Include="lib\Landis.Library.Climate-v4.1.dll" />
+    <None Include="lib\Landis.Library.Climate-v4.dll" />
+    <None Include="lib\Landis.Library.Cohorts-v2.dll" />
+    <None Include="lib\Landis.Library.InitialCommunity-vBiomassCohorts.dll" />
+    <None Include="lib\Landis.Library.Metadata-v2.dll" />
+    <None Include="lib\Landis.Library.Parameters-v2.dll" />
+    <None Include="lib\Landis.Library.Succession-v8.dll" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="Landis.Core" Version="2.0.0" />
   </ItemGroup>
 
