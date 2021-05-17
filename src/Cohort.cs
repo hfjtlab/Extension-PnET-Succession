@@ -624,7 +624,7 @@ namespace Landis.Extension.Succession.BiomassPnET
                             float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo take out amount equal to difference between fol and IdealFol of NSC as carbon tax for month 
 
                             // Subtract from NSC do not add Fol
-                            nsc -= 2.0f * Folalloc;
+                            nsc -= 1.0f * Folalloc;
                         //}
                     }
                     else if (ecoregion.Variables.Month > (int)Constants.Months.June) //During and after defoliation events
@@ -642,7 +642,7 @@ namespace Landis.Extension.Succession.BiomassPnET
                                 fol += Folalloc / species.CFracBiomass;// gDW
 
                                 // Subtract from NSC
-                                nsc -= 10.0f * Folalloc2; // resource intensive to reflush in middle of growing season
+                                nsc -= 5.0f * Folalloc2; // resource intensive to reflush in middle of growing season
 
                             }
                             else //No attempted refoliation but carbon loss after defoliation
@@ -652,7 +652,7 @@ namespace Landis.Extension.Succession.BiomassPnET
                                 float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo 10x IdealFol to take out NSC 
 
                                 // Subtract from NSC do not add Fol
-                                nsc -= 10.0f * Folalloc;
+                                nsc -= 5.0f * Folalloc;
                             }
                             //firstAlloc = false;  // Denotes that allocation has been applied to one sublayer
                         }
