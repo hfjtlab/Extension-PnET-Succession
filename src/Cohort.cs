@@ -621,10 +621,10 @@ namespace Landis.Extension.Succession.BiomassPnET
                             ReduceFoliage(defolProp);
                           //  firstDefol = false;
                             // carbon stress from defoliation in June
-                            float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo take out amount equal to difference between fol and IdealFol of NSC as carbon tax for month 
+                            //float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo take out amount equal to difference between fol and IdealFol of NSC as carbon tax for month 
 
                             // Subtract from NSC do not add Fol
-                            nsc -= 1.0f * Folalloc;
+                            //nsc -= 0.5f * Folalloc;
                         //}
                     }
                     else if (ecoregion.Variables.Month > (int)Constants.Months.June) //During and after defoliation events
@@ -637,22 +637,22 @@ namespace Landis.Extension.Succession.BiomassPnET
                                 // carbon fraction of biomass to convert C to DW
                                 float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * ((0.65f * IdealFol) - fol)));  // 65% refoliation
 
-                                float Folalloc2 = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol)));  // cost of refol is the 10x cost of getting to IdealFol
+                                float Folalloc2 = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol)));  // cost of refol is the 2x cost of getting to IdealFol
 
                                 fol += Folalloc / species.CFracBiomass;// gDW
 
                                 // Subtract from NSC
-                                nsc -= 5.0f * Folalloc2; // resource intensive to reflush in middle of growing season
+                                nsc -= 2.0f * Folalloc2; // resource intensive to reflush in middle of growing season
 
                             }
                             else //No attempted refoliation but carbon loss after defoliation
                             {
                                 // Foliage allocation depends on availability of NSC (allows deficit at this time so no min nsc)
                                 // carbon fraction of biomass to convert C to DW
-                                float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo 10x IdealFol to take out NSC 
+                                float Folalloc = Math.Max(0.0f, Math.Min(nsc, species.CFracBiomass * (IdealFol - fol))); // gC/mo 2x IdealFol to take out NSC 
 
                                 // Subtract from NSC do not add Fol
-                                nsc -= 5.0f * Folalloc;
+                                nsc -= 2.0f * Folalloc;
                             }
                             //firstAlloc = false;  // Denotes that allocation has been applied to one sublayer
                         }
